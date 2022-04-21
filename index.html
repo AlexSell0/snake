@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/style.css" media="screen">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body class="u-body">
+  <div id="pole" style="border: 2px solid green; width: 500px;height: 500px;">
+
+  </div>
+  <p id="block-score"></p>
+  <input type="submit" id="start" value="start" onclick="startInput()">
+  <input type="submit" id="restart" value="restart" onclick="restartInput()">
+  <input type="submit" id="stop" value="stop" onclick="stopInput()" disabled>
+  <style>
+    #apple {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+    }
+
+    table {
+      border-collapse: collapse;
+    }
+
+    td {
+      width: 47px;
+      height: 47px;
+      border: 1px solid grey;
+    }
+
+    table {
+      background-color: #e6fbfd;
+    }
+
+    tr:nth-child(odd) td:nth-child(odd),
+    tr:nth-child(even) td:nth-child(even) {
+      background-color: rgb(101, 255, 101);
+    }
+  </style>
+  <script>
+    //Рисуем поле
+    function poleSnake() {
+      let pole = document.querySelector('#pole');
+      let table = document.createElement('table');
+      pole.appendChild(table);
+      for (let j = 0; j < 10; j++) {
+        let tr = document.createElement('tr');
+        table.appendChild(tr);
+        for (let i = 0; i < 10; i++) {
+          let td = document.createElement('td');
+          tr.appendChild(td);
+        }
+      }
+
+    }
+    poleSnake();
+
+    let kolX = 50;
+    let kolY = 0;
+    let snake = [];
+    let score = snake.length - 1;
+    var timerInterval = 1000;
+
+    let eatMusic = new Audio('music/eat.mp3');
+    let gameOverMusic = new Audio('music/gameover.mp3');
+    let gameMusic = new Audio('music/gamesong.mp3');
+    gameMusic.volume = 0.2;
+    let start = document.getElementById('start');
+    let stop = document.getElementById('stop');
+
+    snakeHeader();
+
+    //Направление движения
+    document.body.addEventListener('keyup', function (event) {
+      if (event.keyCode == 87) {
+        if (kolX != 0 && kolY != 50) {
+          kolX = 0;
+          kolY = -50;
+          snake[snake.length - 1].style.transform = "rotate(180deg)";
+        }
+      } else if (event.keyCode == 83) {
+        if (kolX != 0 && kolY != -50) {
+          kolX = 0;
+          kolY = 50;
+          snake[snake.length - 1].style.transform = "rotate(0deg)";
+        }
+      } else if (event.keyCode == 65) {
+        if (kolX != 50 && kolY != 0) {
+          kolX = -50;
+          kolY = 0;
+          snake[snake.length - 1].style.transform = "rotate(90deg)";
+        }
+      } else if (event.keyCode == 68) {
+        if (kolX != -50 && kolY != 0) {
+          kolX = 50;
+          kolY = 0;
+          snake[snake.length - 1].style.transform = "rotate(270deg)";
+        }
+      }
+    });
+
+    //функция очков
+    function scoreFunc() {
+      score = snake.length - 1;
+      let skoreBlock = document.querySelector('#block-score');
+      skoreBlock.innerHTML = score + ' очко';
+    }
+
+    //Функция создания еды
+    function newEat() {
+      let apple = document.createElement('img');
+      apple.src = 'img/apple.png';
+      apple.classList.add = "apple";
+      apple.id = 'apple';
+
+      let appleX = (Math.floor(Math.random() * (9 - 1 + 1)) + 1) * 50 + 2 + 'px';
+      let appleY = (Math.floor(Math.random() * (9 - 1 + 1)) + 1) * 50 + 2 + 'px';
+
+      //Проверка совпадения координат змейки с яблоком
+      for (i = 0; i < snake.length; i++) {
+        if (snake[i].style.left == appleX && snake[i].style.top == appleY) {
+          apple = null;
+          newEat();
+        }
+      }
+
+      apple.style.left = appleX;
+      apple.style.top = appleY;
+
+      document.body.appendChild(apple);
+    }
+    newEat();
+
+    function hvostPos() {
+      let newimg = document.createElement('img');
+      newimg.src = 'img/timer-2.png';
+      newimg.style.position = 'absolute';
+      newimg.style.width = '50px';
+      newimg.style.height = '50px';
+      newimg.style.top = parseInt(snake[snake.length - 1].style.top) - kolY + 'px';
+      newimg.style.left = parseInt(snake[snake.length - 1].style.left) - kolX + 'px';
+      snake.push(newimg);
+      document.body.appendChild(newimg);
+    }
+
+    //Голова змеи
+    function snakeHeader() {
+      let img = document.createElement('img');
+      img.className = "snake";
+      if (snake.length == 0) {
+        img.src = "img/timer-1.png";
+      } else {
+        img.src = "img/snake.png";
+      }
+      img.style.width = '50px';
+      img.style.height = '50px';
+      img.style.position = 'absolute';
+      if (snake.length == 0) {
+        img.style.top = '2px';
+        img.style.left = '2px';
+      } else {
+        img.style.top = parseInt(snake[0].style.top) + kolY + 'px';
+        img.style.left = parseInt(snake[0].style.left) + kolX + 'px';
+      }
+
+      if (kolX == 0 && kolY == -50) {
+        img.style.transform = "rotate(180deg)";
+      } else if (kolX == 0 && kolY == 50) {
+        img.style.transform = "rotate(0deg)";
+      } else if (kolX == -50 && kolY == 0) {
+        img.style.transform = "rotate(90deg)";
+      } else if (kolX == 50 && kolY == 0) {
+        img.style.transform = "rotate(270deg)";
+      }
+
+      document.body.appendChild(img);
+      snake.unshift(img);
+    };
+
+    //Движение змейки
+    function snakeGo() {
+      snakeHeader();
+      snake.pop().remove();
+      let snakeImg = document.querySelectorAll('.snake');
+      snakeImg[snakeImg.length - 1].src = "img/timer-1.png";
+      for (let i = 0; i < snakeImg.length - 1; i++) {
+        snakeImg[i].src = "img/snake.png";
+      }
+    }
+
+    function game() {
+      if (parseInt(snake[0].style.left) >= 502 || parseInt(snake[0].style.left) <= 1 || parseInt(snake[0].style.top) <= 1 || parseInt(snake[0].style.top) >= 502) {
+        gameMusic.currentTime = 0;
+        gameMusic.pause();
+        gameOverMusic.play();
+        alert('GameOver');
+        stopCountTImer();
+        return score;
+      };
+
+      for (i = 1; i < snake.length; i++) {
+        if (snake[i].style.left == snake[0].style.left && snake[i].style.top == snake[0].style.top) {
+          gameMusic.currentTime = 0;
+          gameMusic.pause();
+          gameOverMusic.play();
+          alert('GameOver<br>Вы набрали ' + score + ' очков');
+          stopCountTImer();
+          // return score;
+        }
+
+      }
+
+      if (parseInt(snake[0].style.left) == parseInt(apple.style.left) && parseInt(snake[0].style.top) == parseInt(apple.style.top)) {
+        eatMusic.play();
+        apple.remove();
+        newEat();
+        hvostPos();
+        timerInterval -= 20;
+        clearInterval(timer);
+        timer = setInterval(game, timerInterval);
+      }
+
+      snakeGo();
+      scoreFunc();
+      gameMusic.play();
+    }
+
+    function startTimerClock(timerInterval) {
+      timer = setInterval(game, timerInterval);
+    }
+
+    // startTimerClock(timerInterval);
+
+    function stopCountTImer() {
+      clearInterval(timer);
+    }
+
+    function startInput() {
+      startTimerClock(timerInterval);
+      stop.disabled = false;
+      start.disabled = true;
+    }
+
+    function stopInput() {
+      stopCountTImer();
+      start.disabled = false;
+      stop.disabled = true;
+    }
+
+    function restartInput() {
+      score = 0;
+      snake.length = 1;
+      snake[0].style.left = '2px';
+      snake[0].style.top = '2px';
+      kolX = 50;
+      kolY = 0;
+      timerInterval = 1000;
+
+      let imgRemove = document.querySelectorAll('.snake');
+      for (i = 0; i < imgRemove.length; i++) {
+        imgRemove[i].remove();
+      }
+
+      stop.disabled = true;
+      start.disabled = false;
+
+      console.log(snake);
+    }
+
+  </script>
+
+
+
+
+</body>
+
+</html>

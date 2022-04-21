@@ -1,0 +1,347 @@
+.u-body{
+    padding: 0;
+    margin: 0;
+}
+
+.block_content{
+    width: 100%;
+}
+
+.content_header{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    align-items: center;
+    z-index: 2;
+}
+
+.logo{
+    padding-top: 40px;
+    width: 80px;
+    position: relative;
+}
+
+.phone{
+    padding-right: 40px;
+    color: #000000;
+    font-size: 24px;
+    font-family: 'FuturaPT',Arial,sans-serif;
+    line-height: 1.55;
+    font-weight: 500;
+    border-width: 1px;
+    border-radius: 30px;
+    background-position: center center;
+    border-color: transparent;
+    border-style: solid;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    text-decoration: none;
+}
+
+.phone:hover{
+    color: rgb(73, 164, 243);
+}
+
+.content_main{
+    padding: 0 15%;
+    position: relative;
+    z-index: 2;
+}
+
+.neo_invest{
+    display: block;
+    padding-top: 80px;
+    color: #000000;
+    font-size: 14px;
+    font-family: 'FuturaPT',Arial,sans-serif;
+    line-height: 1.55;
+    font-weight: 400;
+    opacity: 0.6;
+    background-position: center center;
+    border-color: transparent;
+    border-style: solid;
+}
+
+.heading_h1{
+    color: #000000;
+    font-size: 50px;
+    font-family: 'FuturaPT',Arial,sans-serif;
+    line-height: 1.15;
+    font-weight: 600;
+    background-position: center center;
+    border-color: transparent;
+    border-style: solid;
+    max-width: 60%;
+    padding-bottom: 15px;
+    padding-top: 20px;
+}
+
+.price{
+    color: #000000;
+    font-size: 40px;
+    font-family: 'FuturaPT',Arial,sans-serif;
+    line-height: 1.55;
+    font-weight: 300;
+    background-position: center center;
+    border-color: transparent;
+    border-style: solid;
+    opacity: 0.7;
+}
+
+.sell{
+    color: rgb(73, 164, 243);
+    font-weight: 700;
+    font-size: 40px;
+    font-family: 'FuturaPT',Arial,sans-serif;
+    line-height: 1.55;
+}
+
+.list{
+    color: #000000;
+    font-size: 20px;
+    font-family: 'FuturaPT',Arial,sans-serif;
+    line-height: 1.55;
+    font-weight: 400;
+    background-position: center center;
+    border-color: transparent;
+    border-style: solid;
+    opacity: 0.7;
+    padding-top: 15px;
+}
+
+.block_btn{
+    padding-top: 35px;
+    padding-bottom: 55px;
+    max-width: 350px;
+}
+
+.btn{
+    border-width: 1px;
+    border-radius: 15px;
+    background-color: #49a4f3;
+    background-position: center center;
+    border-color: transparent;
+    border-style: solid;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    box-shadow: 2px 5px 20px 0px rgb(73 164 243);
+    padding: 15px 15px;
+    text-align: center;
+}
+
+.btn a{
+    color: #ffffff!important;
+    font-size: 18px;
+    font-family: 'FuturaPT',Arial,sans-serif;
+    line-height: 1.55;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.background_right{
+    display: block;
+    background-color: #eeeeee;
+    height: 500px;
+    width: 35%;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.image_logo{
+    width: 152px;
+    position: absolute;
+    top: 70px;
+    right: 40%;
+    opacity: 0.4;
+    margin: 0 auto;
+    z-index: 5;
+}
+
+.image_background{
+    opacity: 0.9;
+    position: absolute;
+    top: 114px;
+    right: 0;
+    width: 43.5%;
+    height: 550px;
+    background-image: url(https://thumb.tildacdn.com/tild6336-3936-4633-a664-353037356330/-/format/webp/sedmoy-kontinent-kra.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    background-size: cover;
+    z-index: 1;
+}
+
+@media (max-width: 1400px) {
+    .content_main{
+        padding: 0 8%;
+    }
+}
+
+@media (max-width: 1300px) {
+    .content_main{
+        padding: 0 10%;
+    }
+}
+
+@media (max-width: 1285px) {
+    .content_main{
+        padding: 0 8%;
+    }
+}
+
+@media (max-width: 1250px) {
+    .content_main{
+        padding: 0 7%;
+    }
+}
+
+
+@media (max-width: 1050px) {
+    .content_main{
+        padding: 0 5.5%;
+    }
+}
+
+@media (max-width: 1050px) {
+    .content_main{
+        padding: 0 4%;
+    }
+}
+
+@media (max-width: 990px) {
+    .content_main{
+        padding: 0 2.5%;
+    }
+}
+
+@media (max-width: 980px) {
+    .content_main{
+        padding: 0 2%;
+    }
+}
+
+@media (max-width: 959px) {
+    .content_main{
+        padding: 0 17%;
+    }
+
+    .background_right{
+        display: none;
+    }
+
+    .image_background{
+        display: none;
+    }
+
+    .image_logo{
+        left: 50%;
+    }
+}
+
+@media (max-width: 886px) {
+    .content_main{
+        padding: 0 14%;
+    }
+}
+
+@media (max-width: 850px) {
+    .content_main{
+        padding: 0 12.5%;
+    }
+}
+
+@media (max-width: 800px){
+    .content_main {
+        padding: 0 12%;
+    }
+}
+
+@media (max-width: 768px){
+    .content_main {
+        padding: 0 12%;
+    }
+
+    .logo{
+        left: 0;
+    }
+
+    .heading_h1{
+        max-width: 100%;
+    }
+
+    .btn{
+        padding: 20px 5px;
+    }
+
+    .block_btn{
+        padding-top: 40px;
+        padding-bottom: 60px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .phone{
+        padding-right: 10px;
+    }
+
+    .heading_h1{
+        width: auto;
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 586px) {
+    .content_main{
+        padding: 0 10%;
+    }
+}
+
+@media (max-width: 570px) {
+    .content_main{
+        padding: 0 9%;
+    }
+}
+
+@media (max-width: 550px) {
+    .content_main{
+        padding: 0 7%;
+    }
+}
+
+@media (max-width: 520px) {
+    .phone{
+        padding-right: 20px;
+        font-size: 20px;
+    }
+
+    .heading_h1{
+        font-size: 40px;
+        width: auto;
+    }
+
+    .price{
+        font-size: 30px;
+    }
+
+    .sell{
+        font-size: 30px;
+    }
+
+    .list{
+        padding-top: 20px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 510px) {
+    .content_main{
+        padding: 0 4.5%;
+    }
+}
+
+@media (max-width: 500px) {
+    .content_main{
+        padding: 0 3%;
+    }
+}
